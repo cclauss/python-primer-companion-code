@@ -41,20 +41,16 @@ class AlchemyLanguageUtils(BaseService):
 
     primeEntity = None
     primeKeyword = None
- 
-    if 'entities' in alchemyResults:
-      entities = alchemyResults['entities']
-      if 0 < len(entities): 
-        primeEntity = entities[0].get('text', None)  
 
-    if 'keywords' in alchemyResults:
-      keywords = alchemyResults['keywords']
-      if 0 < len(keywords): 
-        primeKeyword = keywords[0].get('text', None)  
+    entities = alchemyResults.get('entities')
+    if entities: 
+      primeEntity = entities[0].get('text', None)  
 
+    keywords = alchemyResults.get('keywords')
+    if keywords: 
+      primeKeyword = keywords[0].get('text', None)
 
-    retData = { "prime_entity" : primeEntity,
-                "prime_keyword" : primeKeyword }
-    return retData
+    return { "prime_entity": primeEntity,
+             "prime_keyword": primeKeyword }
 
 
